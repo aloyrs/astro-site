@@ -9,7 +9,7 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <Layout>
-  <div class="my-10">
+  <div class="space-y-10">
     <div class="flex flex-col items-start">
       <h1 class="hello-world title text-3xl sm:text-5xl tracking-widest">
         Hello World!<span>&nbsp;</span>
@@ -27,7 +27,7 @@ const posts = (await getCollection("blog")).sort(
         <a href="/blog" class="text-xs text-gray-500 pt-1"> → View all posts</a>
       </div>
 
-      <ul class="my-4 sm:my-2 mb-4">
+      <ul class="space-y-4 sm:space-y-2 mb-4">
         {
           posts.slice(0, maxPost).map((post) => (
             <li class="flex flex-col gap-x-2 sm:flex-row">
