@@ -1,18 +1,13 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <main></main>
-    <Footer />
-  </body>
-</html>
+<Layout>
+  <p>
+    Hey there, I'm Aloysius, your friendly neighborhood Software Engineer! 🚀
+    Currently, I'm rocking it at DXC Technology as a Java magician 🧙‍♂️. Welcome
+    to my little corner of the internet where I capture all the exciting things
+    I'm learning and spill a little of my personality along the way. Join me on
+    this coding journey! 💻🎉
+  </p>
+</Layout>
