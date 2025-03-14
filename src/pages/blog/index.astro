@@ -1,36 +1,39 @@
 ---
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
 import Layout from "../../layouts/Layout.astro";
-
+import BlogPostPreview from "../../components/BlogPostPreview.astro";
+import TagsPreview from "../../components/TagsPreview.astro";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 const noOfPosts = posts.length;
 const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())];
+
+const { page } = Astro.props;
 ---
 
 <Layout>
-  <section>
-    <h1 class="title mb-6">
-      Posts<span class="text-gray-500">
-        ({noOfPosts})
-      </span>
-    </h1>
-    <ul>
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}/`}>
-              <p class="date">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
-              <h4 class="title">{post.data.title}</h4>
-              {post.data.tags.map((tag) => {})}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  <main>
+    <section>
+      <h1 class="title mb-6">
+        Posts<span class="text-gray-500">
+          ({noOfPosts})
+        </span>
+      </h1>
+      <div class="md:flex justify-between">
+        <div>
+          <ul>
+            {
+              posts.map((post) => (
+                <li>
+                  <BlogPostPreview post={post} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <TagsPreview uniqueTags={uniqueTags} />
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogPostPreview from "../../components/BlogPostPreview.astro";
+import { getCollection } from "astro:content";
+
+// Function to get all the unique tags for the dynamic route
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())];
+
+  // Generate paths for each tag
+  return uniqueTags.map((tag) => ({
+    params: { tag },
+  }));
+}
+
+const { tag } = Astro.params;
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Filter posts based on the selected tag
+const filteredPosts = posts.filter((post) => post.data.tags.includes(tag));
+const filteredPostsLength = filteredPosts.length;
+---
+
+<Layout>
+  <h1 class="title mb-6">
+    <a class="text-accent sm:hover:underline" href="/tags">Tags</a>
+    <span class="text-gray-300 text-2xl">
+      &#8594; &#35;{tag}
+    </span>
+    <span class="text-gray-500">
+      ({filteredPostsLength})
+    </span>
+  </h1>
+  <ul>
+    {filteredPosts.map((post) => <BlogPostPreview post={post} />)}
+  </ul>
+</Layout>

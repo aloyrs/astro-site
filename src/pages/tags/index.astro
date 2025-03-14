@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const tagsHashMap: { [key: string]: number } = {};
+
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    if (tagsHashMap[tag]) {
+      tagsHashMap[tag] += 1;
+    } else {
+      tagsHashMap[tag] = 1;
+    }
+  }
+}
+---
+
+<Layout>
+  <h1 class="title mb-6">Tags</h1>
+  {
+    Object.entries(tagsHashMap).map(([tag, val]) => (
+      <li class="flex items-center gap-x-2 mb-4">
+        <a
+          class="link inline-block"
+          href={`/tags/${tag}/`}
+          title={`View posts with the tag: ${tag}`}
+          rel="prefetch"
+        >
+          &#35;{tag}
+        </a>
+        <span class="inline-block">
+          - {val} Post{val > 1 && "s"}
+        </span>
+      </li>
+    ))
+  }
+</Layout>

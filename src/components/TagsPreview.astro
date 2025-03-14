@@ -1,0 +1,44 @@
+---
+const { uniqueTags } = Astro.props;
+
+const numOfUniqueTagsShown = 4;
+const uniqueTagsShown = uniqueTags.slice(0, numOfUniqueTagsShown);
+---
+
+<div class="space-y-3">
+  <h1 class="text-xl">
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+      class="me-1 inline-block h-6 w-6"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path
+        d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z"
+      ></path>
+      <path
+        d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116"
+      ></path>
+      <path d="M6 9h-.01"></path>
+    </svg>Tags
+  </h1>
+  <div class="space-x-1">
+    {
+      uniqueTagsShown.map((uniqueTag: string) => (
+        <button class="bg-accent hover:bg-red-800 text-black font-normal py-1 px-2 rounded-lg">
+          <a href={`/tags/${uniqueTag}`}>{uniqueTag}</a>
+        </button>
+      ))
+    }
+  </div>
+  <div>
+    <a href="/tags" class="link">View all →</a>
+  </div>
+</div>

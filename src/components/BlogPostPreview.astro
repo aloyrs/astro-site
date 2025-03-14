@@ -1,0 +1,24 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+const { post } = Astro.props;
+
+const maxCharactersInDescription = 10;
+const words = post.data.description.split(" ");
+const firstCharacters = words.slice(0, maxCharactersInDescription).join(" ");
+---
+
+<div class="mb-8">
+  <div class="flex-row mb-2 lg:flex">
+    <p class="min-w-[120px] text-gray-500">
+      <FormattedDate date={post.data.pubDate} />
+    </p>
+    <a href={`/blog/${post.id}/`} class="link">{post.data.title}</a>
+  </div>
+  <q class="italic">
+    {
+      words.length > maxCharactersInDescription
+        ? `${firstCharacters}...`
+        : `${firstCharacters}`
+    }
+  </q>
+</div>
