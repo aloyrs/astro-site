@@ -4,3 +4,8 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 @import "tailwindcss";
+
+body {
+  background-color: rgb(29, 33, 44);
+  color: rgb(238, 237, 240);
+}
