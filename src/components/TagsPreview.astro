@@ -32,7 +32,10 @@ const uniqueTagsShown = uniqueTags.slice(0, numOfUniqueTagsShown);
   <div class="space-x-1">
     {
       uniqueTagsShown.map((uniqueTag: string) => (
-        <button class="bg-accent hover:bg-red-800 text-black font-normal py-1 px-2 rounded-lg">
+        <button
+          style="background-color:rgb(245, 109, 109)"
+          class="hover:bg-red-800 text-black font-normal py-1 px-2 rounded-lg"
+        >
           <a href={`/tags/${uniqueTag}`}>{uniqueTag}</a>
         </button>
       ))
