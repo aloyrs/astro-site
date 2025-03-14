@@ -14,6 +14,10 @@
     "@astrojs/sitemap": "^3.2.1",
     "@tailwindcss/vite": "^4.0.14",
     "astro": "^5.5.2",
-    "tailwindcss": "^4.0.14"
+    "tailwindcss": "^4.0.14",
+    "three": "^0.174.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.174.0"
   }
 }

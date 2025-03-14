@@ -1,0 +1,117 @@
+---
+
+---
+
+<script>
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+  import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    100,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  const renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  const modelContainer = document.getElementById("model-container");
+
+  // Check if the element exists before appending the renderer's DOM element
+  if (modelContainer) {
+    modelContainer.appendChild(renderer.domElement);
+
+    // Function to update the camera aspect ratio
+    function updateCameraAspect() {
+      // @ts-ignore
+      camera.aspect = modelContainer.clientWidth / modelContainer.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+
+    // Set the canvas size to match the parent's size
+    function resizeCanvas() {
+      // @ts-ignore
+      renderer.setSize(modelContainer.clientWidth, modelContainer.clientHeight);
+      updateCameraAspect();
+    }
+
+    // Initial canvas size setup
+    resizeCanvas();
+
+    // Handle window resizing to keep the canvas size in sync with the parent
+    window.addEventListener("resize", resizeCanvas);
+  } else {
+    console.error("Element with ID 'model-container' not found.");
+  }
+
+  // Instantiate a loader
+  const loader = new GLTFLoader();
+  // Optional: Provide a DRACOLoader instance to decode compressed mesh data
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath(
+    "https://www.gstatic.com/draco/versioned/decoders/1.5.6/"
+  );
+  loader.setDRACOLoader(dracoLoader);
+
+  loader.load(
+    "/model.gltf",
+    function (gltf: any) {
+      const model = gltf.scene;
+      scene.add(model);
+
+      // Position the model
+      model.position.set(0, -11, 0);
+
+      // Increase the model's size
+      model.scale.set(1, 1, 1); // Adjust as needed
+
+      camera.position.set(-80, 10, 0);
+      camera.fov = 20; // Adjust the FOV value as needed (in degrees)
+      camera.updateProjectionMatrix(); // Update the camera's projection matrix
+
+      //   Lighting
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 3); // Color, Intensity (adjust as needed)
+      directionalLight.position.set(-3, 3, -1); // Example position
+      scene.add(directionalLight);
+      const directionalLight2 = new THREE.DirectionalLight(0xffffff, 3);
+      directionalLight2.position.set(3, -3, 1); // Example position on the opposite side
+      scene.add(directionalLight2);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); // Color, Intensity (adjust as needed)
+      scene.add(ambientLight);
+
+      // Set the background color
+      const clearColor = new THREE.Color(0x000000);
+      renderer.setClearColor(clearColor, 0);
+
+      // Enable OrbitControls
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableZoom = true; // Enable zoom
+      controls.enableDamping = true; // Enable damping for smooth camera movement
+      controls.dampingFactor = 0.1; // Adjust damping factor as needed
+
+      animate(); // Start rendering the scene
+
+      function animateModel() {
+        model.rotation.y += 0.005;
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+        animateModel();
+      }
+    },
+    // called while loading is progressing
+    function (xhr: any) {
+      console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+    },
+    // called when loading has errors
+    function (error: any) {
+      console.log("An error happened", error);
+    }
+  );
+</script>
+
+<div id="model-container" style="height: 300px;"></div>
