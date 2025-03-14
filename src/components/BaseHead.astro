@@ -12,13 +12,13 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
+const { title, description, image = "/images/logo.png" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/images/logo.png" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link
   rel="alternate"
@@ -29,7 +29,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link
+<!-- <link
   rel="preload"
   href="/fonts/atkinson-regular.woff"
   as="font"
@@ -42,7 +42,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   as="font"
   type="font/woff"
   crossorigin
-/>
+/> -->
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
