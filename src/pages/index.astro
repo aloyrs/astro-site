@@ -27,8 +27,10 @@ const posts = (await getCollection("blog")).sort(
 
     <section aria-label="Blog post list">
       <div class="flex items-center mb-4 space-x-4">
-        <h1>Posts</h1>
-        <a href="/blog" class="text-xs text-gray-500 pt-1"> → View all posts</a>
+        <h2>Posts</h2>
+        <a href="/blog" class="link text-xs text-gray-500 pt-1">
+          → View all posts</a
+        >
       </div>
 
       <ul class="space-y-4 sm:space-y-2 mb-4">

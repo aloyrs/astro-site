@@ -32,10 +32,7 @@ const uniqueTagsShown = uniqueTags.slice(0, numOfUniqueTagsShown);
   <div class="space-x-1">
     {
       uniqueTagsShown.map((uniqueTag: string) => (
-        <button
-          style="background-color:rgb(245, 109, 109)"
-          class="hover:bg-red-800 text-black font-normal py-1 px-2 rounded-lg"
-        >
+        <button class="tag-button text-black font-normal py-1 px-2 rounded-lg">
           <a href={`/tags/${uniqueTag}`}>{uniqueTag}</a>
         </button>
       ))
@@ -45,3 +42,13 @@ const uniqueTagsShown = uniqueTags.slice(0, numOfUniqueTagsShown);
     <a href="/tags" class="link">View all →</a>
   </div>
 </div>
+
+<style>
+  .tag-button {
+    background-color: rgb(245, 109, 109);
+  }
+
+  .tag-button:hover {
+    background-color: #9f0712;
+  }
+</style>
