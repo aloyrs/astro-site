@@ -1,0 +1,80 @@
+---
+const { headings } = Astro.props;
+---
+
+<script>
+  //@ts-ignore
+  const toggleButton: HTMLButtonElement = document.getElementById(
+    "toggleTableOfContents"
+  );
+  //@ts-ignore
+  const tableOfContents: HTMLUListElement =
+    document.getElementById("tableOfContents");
+
+  toggleButton.addEventListener("click", () => {
+    tableOfContents.classList.toggle("hidden");
+    updateToggleButton();
+  });
+
+  function updateToggleButton() {
+    if (tableOfContents.classList.contains("hidden")) {
+      toggleButton.textContent = "Table of Contents";
+    } else {
+      toggleButton.textContent = "Table of Contents";
+    }
+  }
+
+  updateToggleButton();
+</script>
+
+<style>
+  #tableOfContents {
+    display: block; /* Initially show the table of contents */
+  }
+
+  #tableOfContents.hidden {
+    display: none; /* Hide the table of contents when it has the "hidden" class */
+  }
+
+  .toggle-reminder {
+    font-size: 10px;
+  }
+</style>
+
+<!-- Table of Contents -->
+{
+  !!headings.length && (
+    <aside class="border border-gray-700 p-2 rounded">
+      <div class="flex">
+        <h2 class="m-0 p-5">
+          <button
+            id="toggleTableOfContents"
+            class=" bg-gray-700 sm:hover:bg-accent text-white font-bold py-2 px-4 mb-2 rounded text-xl sm:text-2xl   "
+          />
+          <span class="block text-gray-500 toggle-reminder">
+            Toggle me or click my headers!
+          </span>
+        </h2>
+      </div>
+      <ul id="tableOfContents" class="text-xs sm:text-sm">
+        {headings.map(({ depth, slug, text }) => (
+          <li class="overflow-hidden ">
+            <a
+              class={`block 
+                  ${depth === 2 && `ml-10`}
+                  ${depth === 3 && `ml-20`}
+                  ${depth === 4 && `ml-32`}
+                  ${depth === 5 && `ml-40`}
+                  `}
+              href={`#${slug}`}
+              aria-label={`Scroll to section: ${text}`}
+            >
+              <span class="me-1">↳</span>
+              {text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
+}
