@@ -5,14 +5,11 @@ import Layout from "./Layout.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, tags } = Astro.props;
 ---
 
 <Layout>
   <article>
-    <div class="hero-image">
-      {heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-    </div>
     <div>
       <FormattedDate date={pubDate} />
       {

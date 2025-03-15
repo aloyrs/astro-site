@@ -8,8 +8,6 @@ const posts = (await getCollection("blog")).sort(
 );
 const noOfPosts = posts.length;
 const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())];
-
-const { page } = Astro.props;
 ---
 
 <Layout>
