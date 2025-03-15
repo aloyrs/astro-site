@@ -22,3 +22,11 @@ h2 {
 .link:hover {
   text-decoration-color: rgb(245, 109, 109); /* Change color on hover */
 }
+
+.view-all {
+  font-size: 0.75rem;
+  color: rgb(106, 114 , 130);
+}
+.view-all:hover {
+  color: rgb(245, 109, 109);
+}
