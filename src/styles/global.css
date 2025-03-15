@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
   background-color: rgb(29, 33, 44);
   color: rgb(201, 201, 201);
@@ -29,4 +31,85 @@ h2 {
   color: rgb(245, 109, 109);
 }
 
-@import "tailwindcss";
+.blog {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+.blog h1 {
+  font-weight: 800;
+  font-size: 2.25em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  line-height: 1.1111111;
+}
+
+.blog h2 {
+  font-weight: 700;
+  font-size: 1.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
+}
+
+.blog p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.blog a {
+  text-decoration: underline; /* Native underline */
+  text-decoration-color: rgb(201, 201, 201); /* Custom color */
+  text-underline-offset: 4px;
+}
+
+.blog a:hover {
+  text-decoration-color: rgb(245, 109, 109); /* Change color on hover */
+}
+
+.blog ol {
+  list-style-type: decimal;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.blog ul {
+  list-style-type: disc;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+.blog li {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.blog table {
+  width: 100%;
+  table-layout: auto;
+  text-align: left;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 0.875em;
+  line-height: 1.7142857;
+}
+
+.blog th {
+  border: 1px solid grey;
+  padding: 0.5rem;
+}
+.blog tr {
+  border: 1px solid grey;
+}
+
+.blog td {
+  border: 1px solid grey;
+  padding: 0.5rem;
+}
+
+.blog pre {
+  font-weight: 400;
+  font-size: 0.875em;
+  padding: 1em;
+}
